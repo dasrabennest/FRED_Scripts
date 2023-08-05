@@ -1,0 +1,17 @@
+!pip install fredapi
+
+import fredapi as fa
+import pandas as pd
+from local_settings import fred as settings
+fred = fa.Fred(api_key='api_key')
+
+gdp = fred.get_series('GDP')
+gdp.name = 'gdp'
+gdp.tail()
+
+wcurcir = fred.get_series('WCURCIR')
+wcurcir.name = 'wcurcir'
+
+df = pd.merge(gdp, wcurcir, left_index=True, right_index=True)
+df
+
